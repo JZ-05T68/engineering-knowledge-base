@@ -1,0 +1,23 @@
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.tmp
+
+# Local audit artifacts
+_audit_tmp/
+
+# Prevent accidental inclusion of private runtime data
+.env
+.env.*
+*.log
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.wal
+*.shm
+data/
+backups/
+logs/
