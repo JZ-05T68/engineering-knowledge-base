@@ -568,7 +568,7 @@
         <a href="#workflow">工作流</a>
         <a href="#features">当前能力</a>
         <a href="#screens">界面</a>
-        <a href="#next">未来 30 天</a>
+        <a href="#next">后续方向</a>
       </nav>
     </div>
   </header>
@@ -583,8 +583,8 @@
         <p class="scope-note">公开项目展示仓库。当前公开项目介绍与界面演示，完整源码和可安装版本尚未公开。</p>
         <div class="chips" aria-label="项目状态">
           <span class="chip green">已有本地可运行 MVP</span>
-          <span class="chip">展示基线 v0.1.2</span>
-          <span class="chip orange">v0.1.3 正在验证</span>
+          <span class="chip">展示基线 v0.2.0</span>
+          <span class="chip green">v0.2.0 发布验收通过</span>
         </div>
       </div>
       <div class="hero-shot">
@@ -600,8 +600,8 @@
         <h2>已有可运行 MVP，继续把真实使用做扎实</h2>
         <div class="status-grid">
           <div class="status-card"><span>当前阶段</span><strong>本地可运行 MVP</strong></div>
-          <div class="status-card"><span>稳定展示基线</span><strong>v0.1.2</strong></div>
-          <div class="status-card"><span>当前开发</span><strong>v0.1.3 进行中</strong></div>
+          <div class="status-card"><span>稳定展示基线</span><strong>v0.2.0</strong></div>
+          <div class="status-card"><span>当前状态</span><strong>v0.2.0 验收通过</strong></div>
           <div class="status-card"><span>公开范围</span><strong>介绍与界面演示</strong></div>
         </div>
       </div>
@@ -657,7 +657,7 @@
     <section id="features">
       <div class="container">
         <p class="eyebrow">What works now</p>
-        <h2>v0.1.2：当前已经实现</h2>
+        <h2>v0.2.0：当前已经实现</h2>
         <p class="section-intro">功能取舍围绕“导入—复核—检索—摘录—整理—恢复”的日常闭环。</p>
         <div class="feature-grid">
           <article class="card"><span class="number">IMPORT</span><h3>PDF 导入与页面化</h3><p>SHA-256 去重、原文件保留、逐页渲染和已有文本层提取。</p></article>
@@ -667,7 +667,17 @@
           <article class="card"><span class="number">BATCH</span><h3>可见范围批量整理</h3><p>批量处理当前可见页面的状态、标签和项目，写入前预检并确认。</p></article>
           <article class="card"><span class="number">MAINTENANCE</span><h3>本地备份、恢复与诊断</h3><p>提供完整备份、恢复预检和默认只读的系统诊断。</p></article>
         </div>
-        <div class="boundary"><strong>技术边界：</strong>本地单用户；核心功能离线可用；SQLite + FTS5；正式服务只监听 127.0.0.1:8501；无账号和云存储依赖；v0.1.2 无需 API Key。</div>
+        <h3 style="margin-top:36px">v0.2.0 发布亮点：超长工程 PDF 处理底座</h3>
+        <div class="feature-grid">
+          <article class="card"><span class="number">LONG</span><h3>超长文档完整导入</h3><p>较长工程 PDF 可以完整导入，不缺页、不中断。</p></article>
+          <article class="card"><span class="number">SINGLE</span><h3>单页重新处理</h3><p>单个页面重新处理只渲染该页，不再重新渲染整份文档。</p></article>
+          <article class="card"><span class="number">DIAGNOSE</span><h3>非标准页面诊断</h3><p>空白、短文本、横向和旋转页面由明确规则自动识别，可携带多个标志。</p></article>
+          <article class="card"><span class="number">ISOLATION</span><h3>页级失败隔离</h3><p>单页失败不中断后续页面，部分失败不会被错误显示为全部成功。</p></article>
+          <article class="card"><span class="number">SUMMARY</span><h3>文档级诊断摘要</h3><p>一次导入给出各类页面数量与对应页码，便于快速定位非标准页面。</p></article>
+          <article class="card"><span class="number">VERIFIED</span><h3>验证结果</h3><p>335 项自动化测试、120 页自动化长文档基线、300 页混合 PDF 验收与人工冒烟测试全部通过。</p></article>
+        </div>
+        <p class="section-intro" style="margin-top:18px">验收环境为 Python 3.11.9 与 PyMuPDF 1.28.0；该环境下 300 页完整处理约 11.7 秒、完整导入约 14.0 秒。性能数字仅代表单次本地验收环境，不构成通用性能承诺。详见 <a href="./v0.2.0-release-summary.md">v0.2.0 公开发布摘要</a>。</p>
+        <div class="boundary"><strong>技术边界：</strong>本地单用户、离线优先；SQLite + FTS5；正式服务只监听 127.0.0.1:8501；无账号和云同步依赖；v0.2.0 不接入 LangChain、LangGraph、Agent 或任何 AI SDK，核心能力不需要 API Key；当前没有 OCR、断点续传、后台导入和自动重试。</div>
       </div>
     </section>
 
@@ -675,7 +685,7 @@
       <div class="container">
         <p class="eyebrow">Interface</p>
         <h2>真实界面，合成演示资料</h2>
-        <p class="section-intro">以下截图均来自实际 v0.1.2 界面，使用与正式环境隔离的合成演示资料，不包含真实课程材料或个人数据。</p>
+        <p class="section-intro">以下截图展示的是核心 UI 工作流，均来自 v0.1.2 界面，使用与正式环境隔离的合成演示资料，不包含真实课程材料或个人数据。v0.2.0 主要扩展 PDF 处理底座，界面工作流保持一致；这些截图不是 v0.2.0 新截图。</p>
         <div class="shot-grid">
           <article class="shot-card featured">
             <div class="shot"><img src="../assets/reading-and-review.png" width="1280" height="720" loading="lazy" alt="页面阅读与复核界面，左侧为合成实验资料页面，右侧为 Markdown 笔记编辑区"></div>
@@ -711,9 +721,9 @@
         <h2>当前进度</h2>
         <ul class="progress-list">
           <li>已有本地可运行 MVP，并持续迭代了多个版本；</li>
-          <li>v0.1.2 是稳定展示基线；</li>
-          <li>v0.1.3 正在进行稳定性修复、扩大真实资料规模和完整人工测试，尚未完成、尚未发布；</li>
-          <li>当前已公开项目介绍，但完整源码和可安装版本尚未公开；</li>
+          <li>v0.2.0 是当前稳定展示基线，已完成本地发布验收；</li>
+          <li>v0.2.0 完成 335 项自动化测试、120 页自动化长文档基线、300 页混合 PDF 规模验收和人工冒烟测试；</li>
+          <li>完整源码和可安装版本仍未公开，当前公开仓库继续作为项目展示页；</li>
           <li>尚未形成规模化外部用户。</li>
         </ul>
       </div>
@@ -721,14 +731,13 @@
 
     <section id="next">
       <div class="container">
-        <p class="eyebrow">Next 30 days</p>
-        <h2>未来 30 天</h2>
+        <p class="eyebrow">Next steps</p>
+        <h2>后续方向</h2>
         <div class="plan-grid">
-          <article class="plan-card"><span class="plan-no">01</span><h3>完成稳定性修复和完整人工测试</h3><p>记录实际结果，不把未完成版本提前包装为发布。</p></article>
-          <article class="plan-card"><span class="plan-no">02</span><h3>导入约 100～400 页真实工程资料</h3><p>观察资料增长后的搜索、阅读和整理体验。</p></article>
-          <article class="plan-card"><span class="plan-no">03</span><h3>验证核心流程</h3><p>覆盖搜索、筛选、编辑、证据摘录、备份与恢复。</p></article>
-          <article class="plan-card"><span class="plan-no">04</span><h3>完善首次使用和反馈记录</h3><p>让反馈回到具体页面、操作和场景。</p></article>
-          <article class="plan-card"><span class="plan-no">05</span><h3>邀请 3～5 名同学小范围试用</h3><p>根据真实反馈确定下一阶段迭代。</p></article>
+          <article class="plan-card"><span class="plan-no">01</span><h3>改善人工组织工作流</h3><p>继续改善工程资料的人工组织和页面级工作流。</p></article>
+          <article class="plan-card"><span class="plan-no">02</span><h3>评估内容组织能力</h3><p>评估手写内容的人工整理、局部笔记、重点分级与关系组织。</p></article>
+          <article class="plan-card"><span class="plan-no">03</span><h3>诊断展示与恢复能力</h3><p>诊断摘要展示、文档状态刷新与恢复能力属于后续事项。</p></article>
+          <article class="plan-card"><span class="plan-no">04</span><h3>AI 保持后期可选增强</h3><p>AI 不是 v0.2.0 已实现功能，仍作为后期可选增强评估。</p></article>
         </div>
       </div>
     </section>
@@ -755,7 +764,7 @@
           <div>
             <h2>项目介绍附件</h2>
             <p>5 页 16:9 中文项目介绍 PDF</p>
-            <small>附件制作于公开展示仓库建立前；其中“尚未公开发布”指完整源码和可安装版本尚未公开，并非指项目介绍页面。</small>
+            <small>附件是 v0.1.2 时期的早期项目介绍；其中“尚未公开发布”指完整源码和可安装版本尚未公开，并非指项目介绍页面。当前项目状态以本页和 v0.2.0 公开发布摘要为准。</small>
           </div>
           <a class="button" href="./project-introduction.pdf">查看项目介绍 PDF</a>
         </div>
@@ -778,7 +787,7 @@
   </main>
 
   <footer>
-    <div class="container">Engineering Knowledge Base · 公开项目展示仓库 · 稳定展示基线 v0.1.2</div>
+    <div class="container">Engineering Knowledge Base · 公开项目展示仓库 · 稳定展示基线 v0.2.0</div>
   </footer>
 </body>
 </html>
