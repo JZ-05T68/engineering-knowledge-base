@@ -674,7 +674,7 @@
           <article class="card"><span class="number">REGION</span><h3>图片区域证据</h3><p>以原始 PNG 哈希、尺寸和坐标锚定图片局部。</p></article>
           <article class="card"><span class="number">CONFIRM</span><h3>人工确认状态</h3><p>用户可显式确认或取消确认每条证据。</p></article>
           <article class="card"><span class="number">NOTES</span><h3>笔记接入证据篮</h3><p>页面、文字选区与图片区域结构化笔记可显式加入。</p></article>
-          <article class="card"><span class="number">VERIFIED</span><h3>验证结果</h3><p>1020 项收集、1019 passed、1 条 Windows 条件跳过；Ruff 与真人 Smoke Test 通过。</p></article>
+          <article class="card"><span class="number">VERIFIED</span><h3>验证结果</h3><p>最终统一 Release Check、1020 项完整 pytest、Ruff 与真人 Smoke Test 全部通过。</p></article>
         </div>
         <p class="section-intro" style="margin-top:18px">数据库升级为 schema v7，既有证据完整保留并迁移为未确认的文字选区证据。详见 <a href="./v0.4.0-release-summary.md">v0.4.0 公开发布摘要</a>。</p>
         <div class="boundary"><strong>技术边界：</strong>本地单用户、离线优先；SQLite + FTS5；正式服务只监听 127.0.0.1:8501；无账号和云同步依赖；v0.4.0 不要求 API Key，AI 仍只是未来可选增强。</div>
@@ -722,7 +722,7 @@
         <ul class="progress-list">
           <li>已有本地可运行 MVP，并持续迭代了多个版本；</li>
           <li>v0.4.0 是当前稳定展示基线，已完成正式发布；</li>
-          <li>v0.4.0 完整 pytest 收集 1020 项（1019 passed、1 skipped），Ruff 与真人 Smoke Test 通过；</li>
+          <li>v0.4.0 最终统一 Release Check、1020 项完整 pytest、Ruff 与真人 Smoke Test 全部通过；</li>
           <li>完整源码和可安装版本仍未公开，当前公开仓库继续作为项目展示页；</li>
           <li>尚未形成规模化外部用户。</li>
         </ul>
