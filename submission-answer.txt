@@ -4,7 +4,7 @@ Flux 南客松长期 Builder 社区申请第五题
 
 https://github.com/JZ-05T68/engineering-knowledge-base
 
-说明：GitHub login 已确认为 JZ-05T68。远程仓库当前尚未创建，本轮未公开。
+说明：GitHub login 已确认为 JZ-05T68。该地址现为已公开的项目展示仓库。
 
 2. 链接旁可用的一句话介绍
 
