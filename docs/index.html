@@ -2,793 +2,110 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Engineering Knowledge Base：面向工科学生的本地工程资料管理工具。">
-  <title>Engineering Knowledge Base · 项目展示</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Engineering Knowledge Base v0.5.0：本地、单用户、离线优先的个人工程知识管理系统。">
+  <title>Engineering Knowledge Base v0.5.0</title>
   <style>
-    :root {
-      color-scheme: light;
-      --ink: #172637;
-      --ink-2: #304456;
-      --muted: #687887;
-      --line: #d8e1e7;
-      --paper: #f7f9fa;
-      --white: #ffffff;
-      --navy: #16324b;
-      --blue: #2f6b9a;
-      --blue-soft: #edf5f8;
-      --orange: #c9692c;
-      --orange-soft: #f5e8df;
-      --green: #2c785e;
-      --green-soft: #e7f2ed;
-      --shadow: 0 18px 52px rgba(23, 38, 55, 0.1);
-      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", system-ui, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-size: 16px;
-      line-height: 1.75;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: var(--blue);
-      text-underline-offset: 0.18em;
-    }
-
-    a:hover {
-      color: var(--navy);
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
-
-    .topbar {
-      border-top: 7px solid var(--navy);
-      border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.94);
-    }
-
-    .topbar-inner,
-    .container {
-      width: min(1160px, calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 66px;
-      gap: 24px;
-    }
-
-    .brand {
-      color: var(--navy);
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-decoration: none;
-    }
-
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: 8px 22px;
-      font-size: 14px;
-    }
-
-    .nav a {
-      color: var(--ink-2);
-      text-decoration: none;
-    }
-
-    .hero {
-      padding: 72px 0 60px;
-      background:
-        radial-gradient(circle at 85% 8%, rgba(220, 236, 246, 0.95), transparent 32rem),
-        linear-gradient(180deg, #ffffff 0%, var(--paper) 100%);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      align-items: center;
-      gap: 48px;
-    }
-
-    .eyebrow {
-      margin: 0 0 12px;
-      color: var(--blue);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
-    }
-
-    h1 {
-      margin-bottom: 14px;
-      font-size: clamp(42px, 6vw, 72px);
-      line-height: 0.98;
-      letter-spacing: -0.045em;
-    }
-
-    h2 {
-      margin-bottom: 14px;
-      font-size: clamp(30px, 4vw, 44px);
-      line-height: 1.15;
-      letter-spacing: -0.025em;
-    }
-
-    h3 {
-      margin-bottom: 8px;
-      font-size: 21px;
-      line-height: 1.35;
-    }
-
-    .subtitle {
-      margin-bottom: 20px;
-      color: var(--blue);
-      font-size: clamp(22px, 3vw, 32px);
-      font-weight: 800;
-      line-height: 1.3;
-    }
-
-    .lead {
-      margin-bottom: 22px;
-      color: var(--ink-2);
-      font-size: 20px;
-      line-height: 1.65;
-    }
-
-    .scope-note {
-      margin: 0 0 22px;
-      padding: 15px 18px;
-      border-left: 4px solid var(--orange);
-      background: var(--orange-soft);
-      color: #7b3b18;
-      font-weight: 700;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      min-height: 34px;
-      padding: 6px 12px;
-      border: 1px solid #bfd4e1;
-      border-radius: 999px;
-      background: var(--blue-soft);
-      color: var(--navy);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .chip.green {
-      border-color: #bdd8cb;
-      background: var(--green-soft);
-      color: #225e49;
-    }
-
-    .chip.orange {
-      border-color: #e6c7b4;
-      background: var(--orange-soft);
-      color: #8b4218;
-    }
-
-    .hero-shot,
-    .shot {
-      overflow: hidden;
-      border: 1px solid #cbd7df;
-      border-radius: 16px;
-      background: var(--white);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-shot {
-      padding: 10px;
-    }
-
-    .hero-shot img,
-    .shot img {
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    main section {
-      padding: 68px 0;
-    }
-
-    main section:nth-child(even) {
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      background: var(--white);
-    }
-
-    .section-intro {
-      max-width: 780px;
-      margin-bottom: 32px;
-      color: var(--muted);
-      font-size: 18px;
-    }
-
-    .quote {
-      margin: 30px 0 0;
-      padding: 28px 30px;
-      border-radius: 16px;
-      background: var(--navy);
-      color: var(--white);
-      font-size: clamp(20px, 2.5vw, 28px);
-      font-weight: 750;
-      line-height: 1.6;
-    }
-
-    .problem-grid,
-    .feature-grid,
-    .shot-grid,
-    .plan-grid,
-    .status-grid {
-      display: grid;
-      gap: 18px;
-    }
-
-    .problem-grid,
-    .feature-grid,
-    .plan-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .status-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      margin: 28px 0 0;
-    }
-
-    .card,
-    .status-card,
-    .plan-card {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--white);
-    }
-
-    .card,
-    .plan-card {
-      padding: 24px;
-    }
-
-    .card p,
-    .plan-card p,
-    .shot-copy p {
-      margin-bottom: 0;
-      color: var(--muted);
-    }
-
-    .number {
-      display: inline-block;
-      margin-bottom: 10px;
-      color: var(--blue);
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-    }
-
-    .status-card {
-      padding: 18px;
-    }
-
-    .status-card span {
-      display: block;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .status-card strong {
-      display: block;
-      margin-top: 3px;
-      color: var(--navy);
-      font-size: 17px;
-    }
-
-    .workflow {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 34px;
-    }
-
-    .workflow-step {
-      position: relative;
-      min-height: 142px;
-      padding: 18px 14px;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      background: var(--white);
-    }
-
-    .workflow-step:not(:last-child)::after {
-      position: absolute;
-      top: 51px;
-      right: -14px;
-      z-index: 1;
-      content: "→";
-      color: var(--orange);
-      font-size: 24px;
-      font-weight: 900;
-    }
-
-    .workflow-step strong,
-    .workflow-step small {
-      display: block;
-    }
-
-    .workflow-step small {
-      margin-top: 6px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .boundary {
-      margin-top: 22px;
-      padding: 18px 20px;
-      border-left: 4px solid var(--green);
-      border-radius: 10px;
-      background: var(--green-soft);
-      color: #225e49;
-    }
-
-    .shot-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .shot-card {
-      min-width: 0;
-    }
-
-    .shot-card.featured {
-      grid-column: 1 / -1;
-    }
-
-    .shot-copy {
-      padding: 16px 3px 4px;
-    }
-
-    .shot-card.featured .shot {
-      max-width: 920px;
-    }
-
-    .shot {
-      padding: 8px;
-      box-shadow: 0 12px 34px rgba(23, 38, 55, 0.08);
-    }
-
-    .progress-list,
-    .public-list,
-    .future-list {
-      margin: 0;
-      padding-left: 1.25em;
-    }
-
-    .progress-list li,
-    .public-list li,
-    .future-list li {
-      margin: 8px 0;
-    }
-
-    .plan-card {
-      position: relative;
-      padding-left: 72px;
-    }
-
-    .plan-card .plan-no {
-      position: absolute;
-      top: 17px;
-      left: 22px;
-      color: #a9c4d5;
-      font-size: 30px;
-      font-weight: 900;
-      line-height: 1;
-    }
-
-    .warning {
-      margin-bottom: 24px;
-      padding: 20px 22px;
-      border: 1px solid #e6c7b4;
-      border-radius: 12px;
-      background: var(--orange-soft);
-      color: #7b3b18;
-      font-size: 18px;
-      font-weight: 850;
-    }
-
-    .attachment {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 28px;
-      padding: 30px;
-      border-radius: 16px;
-      background: var(--navy);
-      color: var(--white);
-    }
-
-    .attachment h2,
-    .attachment p {
-      margin-bottom: 6px;
-      color: var(--white);
-    }
-
-    .attachment small {
-      display: block;
-      max-width: 760px;
-      color: #cfe0ea;
-      line-height: 1.55;
-    }
-
-    .button {
-      flex: none;
-      display: inline-flex;
-      align-items: center;
-      min-height: 46px;
-      padding: 9px 18px;
-      border-radius: 10px;
-      background: var(--white);
-      color: var(--navy);
-      font-weight: 850;
-      text-decoration: none;
-    }
-
-    footer {
-      padding: 34px 0 48px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    @media (max-width: 920px) {
-      .nav {
-        display: none;
-      }
-
-      .hero-grid,
-      .problem-grid,
-      .feature-grid,
-      .shot-grid,
-      .plan-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .status-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .workflow {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .workflow-step:not(:last-child)::after {
-        display: none;
-      }
-
-      .shot-card.featured {
-        grid-column: auto;
-      }
-
-      .attachment {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .topbar-inner,
-      .container {
-        width: min(100% - 28px, 1160px);
-      }
-
-      .topbar-inner {
-        min-height: 58px;
-      }
-
-      .hero {
-        padding: 48px 0 42px;
-      }
-
-      h1 {
-        font-size: 42px;
-      }
-
-      main section {
-        padding: 48px 0;
-      }
-
-      .workflow,
-      .status-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .quote,
-      .attachment {
-        padding: 22px;
-      }
-
-      .card,
-      .plan-card {
-        padding: 20px;
-      }
-
-      .plan-card {
-        padding-left: 62px;
-      }
-
-      .plan-card .plan-no {
-        left: 18px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-    }
+    :root { color-scheme: light; --ink:#172033; --muted:#5d6678; --line:#dce2ec; --blue:#2458d6; --soft:#f4f7fc; }
+    * { box-sizing:border-box; }
+    body { margin:0; font:16px/1.7 system-ui,"Microsoft YaHei",sans-serif; color:var(--ink); background:#fff; }
+    a { color:var(--blue); }
+    .wrap { width:min(1120px,calc(100% - 40px)); margin:auto; }
+    header { padding:84px 0 64px; background:linear-gradient(135deg,#eef3ff,#fafcff 58%,#edf9f7); border-bottom:1px solid var(--line); }
+    .eyebrow { color:var(--blue); font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    h1 { margin:.2em 0; font-size:clamp(2.3rem,7vw,5rem); line-height:1.05; }
+    h2 { margin:0 0 20px; font-size:clamp(1.7rem,4vw,2.6rem); }
+    h3 { margin:.2em 0; }
+    .lead { max-width:780px; font-size:1.2rem; color:var(--muted); }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+    .button { display:inline-block; padding:10px 18px; border:1px solid var(--blue); border-radius:9px; text-decoration:none; font-weight:700; }
+    .primary { color:#fff; background:var(--blue); }
+    section { padding:64px 0; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .card { padding:24px; border:1px solid var(--line); border-radius:14px; background:#fff; }
+    .card p,.muted { color:var(--muted); }
+    .facts { margin-top:32px; }
+    .shot { margin:28px 0 52px; }
+    .shot img { display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:14px; box-shadow:0 16px 42px #1d35651f; }
+    .shot p { color:var(--muted); }
+    .soft { background:var(--soft); border-block:1px solid var(--line); }
+    pre { padding:22px; overflow:auto; border-radius:12px; background:#101827; color:#dce8ff; }
+    footer { padding:30px 0; color:var(--muted); border-top:1px solid var(--line); }
+    @media (max-width:760px) { .grid { grid-template-columns:1fr; } header,section { padding:44px 0; } }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="#top">ENGINEERING KNOWLEDGE BASE</a>
-      <nav class="nav" aria-label="页面导航">
-        <a href="#why">为什么做</a>
-        <a href="#workflow">工作流</a>
-        <a href="#features">当前能力</a>
-        <a href="#screens">界面</a>
-        <a href="#next">后续方向</a>
-      </nav>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">Local-first · Windows · Single-user</div>
+      <h1>Engineering<br>Knowledge Base <span style="color:var(--blue)">v0.5.0</span></h1>
+      <p class="lead">把用户主动导入的工程 PDF 变成可阅读、可检索、可复核、可引用并可长期复用的个人工程知识资产。SQLite 与本地文件始终是事实来源，AI 只是可选增强。</p>
+      <div class="actions">
+        <a class="button primary" href="https://github.com/JZ-05T68/engineering-knowledge-base-src">查看源码</a>
+        <a class="button" href="./v0.5.0-release-summary.md">v0.5.0 发布摘要</a>
+        <a class="button" href="https://github.com/JZ-05T68/engineering-knowledge-base">GitHub 展示仓库</a>
+      </div>
     </div>
   </header>
 
-  <div id="top" class="hero">
-    <div class="container hero-grid">
-      <div>
-        <p class="eyebrow">Local-first engineering knowledge</p>
-        <h1>Engineering<br>Knowledge Base</h1>
-        <p class="subtitle">面向工科学生的本地工程资料管理工具</p>
-        <p class="lead">将分散的 PDF、课程笔记和实验资料整理为可检索、可复核、可摘录、可长期积累的个人工程知识库。</p>
-        <p class="scope-note">公开项目展示仓库，主要提供项目介绍、截图和演示材料。完整源码已在独立的 <a href="https://github.com/JZ-05T68/engineering-knowledge-base-src">source repository</a> 公开；当前未提供独立安装包或打包后的可执行程序。</p>
-        <div class="chips" aria-label="项目状态">
-          <span class="chip green">已有本地可运行 MVP</span>
-          <span class="chip">展示基线 v0.4.3</span>
-          <span class="chip green">v0.4.3 正式发布</span>
-        </div>
-      </div>
-      <div class="hero-shot">
-        <img src="../assets/home.png" width="1280" height="720" alt="Engineering Knowledge Base v0.1.2 首页，显示合成演示资料的文档、页面、笔记和复核统计">
+  <section>
+    <div class="wrap">
+      <h2>Document → Understanding → Retrieval → Reuse</h2>
+      <div class="grid facts">
+        <article class="card"><h3>本地核心</h3><p>PDF、页面 PNG、Markdown、SQLite 与 FTS5 保存在用户电脑。正式服务只监听 127.0.0.1:8501。</p></article>
+        <article class="card"><h3>Evidence-first</h3><p>整页、文字选区与图片区域都保留文档、文件名、页码、来源哈希和人工确认边界。</p></article>
+        <article class="card"><h3>Optional AI</h3><p>默认 manual、无需 API Key。Qwen provider、embedding 与 Hybrid Retrieval 只有在显式配置和操作时介入。</p></article>
       </div>
     </div>
-  </div>
+  </section>
 
-  <main>
-    <section id="status">
-      <div class="container">
-        <p class="eyebrow">Current status</p>
-        <h2>已有可运行 MVP，继续把真实使用做扎实</h2>
-        <div class="status-grid">
-          <div class="status-card"><span>当前阶段</span><strong>本地可运行 MVP</strong></div>
-          <div class="status-card"><span>稳定展示基线</span><strong>v0.4.3</strong></div>
-          <div class="status-card"><span>当前状态</span><strong>v0.4.3 正式发布</strong></div>
-          <div class="status-card"><span>公开范围</span><strong>介绍与界面演示</strong></div>
-        </div>
+  <section class="soft">
+    <div class="wrap">
+      <h2>v0.5.0 已实现</h2>
+      <div class="grid">
+        <article class="card"><h3>文档与阅读</h3><p>PDF 导入、SHA-256 去重、逐页渲染、文本层提取、本地 OCR、双栏阅读、Markdown 与结构化笔记。</p></article>
+        <article class="card"><h3>检索</h3><p>FTS5 lexical retrieval、page-level embedding 持久化、freshness、vector recall、RRF Hybrid 与 fallback。</p></article>
+        <article class="card"><h3>安全复用</h3><p>证据篮、来源确认、引用证据包、失效 fail-closed、文档删除保护、完整备份与恢复预检。</p></article>
       </div>
-    </section>
+      <pre>production  127.0.0.1:8501  data/
+staging     127.0.0.1:8502  staging-data/
+AI default  manual           no API key required</pre>
+    </div>
+  </section>
 
-    <section id="why">
-      <div class="container">
-        <p class="eyebrow">Why</p>
-        <h2>项目来自一个具体的学习问题</h2>
-        <p class="section-intro">工程资料并不缺，真正缺少的是能在几周后仍然回到原始页面、复核判断并继续使用的工作流。</p>
-        <div class="problem-grid">
-          <article class="card">
-            <span class="number">01</span>
-            <h3>资料分散</h3>
-            <p>PDF、课程笔记、实验记录和代码资料彼此分离，整理成本不断累积。</p>
-          </article>
-          <article class="card">
-            <span class="number">02</span>
-            <h3>记得看过，却找不到</h3>
-            <p>普通搜索缺少页面级上下文，很难快速确认命中位置和原始来源。</p>
-          </article>
-          <article class="card">
-            <span class="number">03</span>
-            <h3>阅读与整理割裂</h3>
-            <p>阅读、复核、摘录、备注和后续归类常在不同工具中完成，线索容易丢失。</p>
-          </article>
-          <article class="card">
-            <span class="number">04</span>
-            <h3>工程知识需要长期积累</h3>
-            <p>同一知识点会在课程、实验和项目中反复出现；一次性问答不能替代可追溯的个人知识资产。</p>
-          </article>
-        </div>
-        <blockquote class="quote">“我需要的不是一次性总结，而是一套能把资料位置、页面依据和自己的理解长期留下来的工作流。”</blockquote>
+  <section>
+    <div class="wrap">
+      <h2>v0.5.0 实际界面</h2>
+      <p class="muted">全部截图使用隔离的合成工程资料，不包含真实用户数据、凭据或机器绝对路径。</p>
+      <article class="shot"><h3>首页概览</h3><img src="../assets/home-overview.jpg" width="1280" height="720" alt="EKB v0.5.0 首页概览"></article>
+      <article class="shot"><h3>页面阅读与 Markdown 整理</h3><img src="../assets/page-reader.jpg" width="1280" height="720" loading="lazy" alt="EKB v0.5.0 双栏页面阅读器"></article>
+      <article class="shot"><h3>关键词检索与命中依据</h3><img src="../assets/keyword-search-results.jpg" width="1280" height="720" loading="lazy" alt="EKB v0.5.0 关键词检索结果"></article>
+      <article class="shot"><h3>Hybrid Retrieval 产品门控</h3><img src="../assets/hybrid-retrieval-mode.jpg" width="1280" height="720" loading="lazy" alt="EKB v0.5.0 AI 混合检索模式"></article>
+      <article class="shot"><h3>证据来源工作流</h3><img src="../assets/evidence-source-workflow.jpg" width="1280" height="720" loading="lazy" alt="EKB v0.5.0 证据篮与来源确认"></article>
+      <article class="shot"><h3>文档管理与删除安全边界</h3><img src="../assets/document-management.jpg" width="1280" height="720" loading="lazy" alt="EKB v0.5.0 文档管理"></article>
+    </div>
+  </section>
+
+  <section class="soft">
+    <div class="wrap">
+      <h2>验证与诚实边界</h2>
+      <div class="grid">
+        <article class="card"><h3>自动与人工 Gate</h3><p>Gate 2B 17/17 PASS；pytest 1399/1399；Ruff clean；首页与 13 个页面人工验收 PASS。</p></article>
+        <article class="card"><h3>数据完整性</h3><p>production health HTTP 200；SQLite schema v8；integrity ok；foreign key violations = 0。</p></article>
+        <article class="card"><h3>Retrieval</h3><p>最小 frozen 5-query Hybrid benchmark 为 5/5 PASS，但不代表所有工程领域质量。</p></article>
       </div>
-    </section>
+      <p class="muted">当前仍是 page-level indexing；运行时 rerank 尚未接入；AI 不能代替关键词检索、来源核验或人工工程判断。</p>
+    </div>
+  </section>
 
-    <section id="workflow">
-      <div class="container">
-        <p class="eyebrow">Workflow</p>
-        <h2>从资料导入，到可复用的页面证据</h2>
-        <p class="section-intro">围绕页面保存状态、笔记、证据选区和来源位置，让检索结果能够回到具体文档与页码。</p>
-        <div class="workflow" aria-label="六步核心工作流">
-          <div class="workflow-step"><span class="number">01</span><strong>资料导入</strong><small>保留 PDF 原件，生成页面图并提取文本层。</small></div>
-          <div class="workflow-step"><span class="number">02</span><strong>阅读复核</strong><small>原图与 Markdown 同屏，维护页面状态。</small></div>
-          <div class="workflow-step"><span class="number">03</span><strong>全文检索</strong><small>多关键词、筛选、排序与高亮。</small></div>
-          <div class="workflow-step"><span class="number">04</span><strong>摘录备注</strong><small>保存具体选区、个人备注和来源。</small></div>
-          <div class="workflow-step"><span class="number">05</span><strong>批量整理</strong><small>处理可见范围内的状态、标签和项目。</small></div>
-          <div class="workflow-step"><span class="number">06</span><strong>备份恢复</strong><small>本地备份、恢复预检与只读诊断。</small></div>
-        </div>
-      </div>
-    </section>
+  <section>
+    <div class="wrap">
+      <h2>恢复边界</h2>
+      <p>GitHub 可恢复代码、脚本、依赖和配置方法；不会保存 .env、真实 Key、私人数据库、用户文档、页面图像、日志、PID、缓存或未脱敏备份。新电脑上的凭据必须由用户重新人工注入。</p>
+      <a class="button primary" href="https://github.com/JZ-05T68/engineering-knowledge-base-src/blob/main/docs/windows-recovery.md">Windows 灾备恢复说明</a>
+    </div>
+  </section>
 
-    <section id="features">
-      <div class="container">
-        <p class="eyebrow">What works now</p>
-        <h2>v0.4.3：当前已经实现</h2>
-        <p class="section-intro">功能取舍围绕“导入—复核—检索—摘录—整理—恢复”的日常闭环。</p>
-        <div class="feature-grid">
-          <article class="card"><span class="number">IMPORT</span><h3>PDF 导入与页面化</h3><p>SHA-256 去重、原文件保留、逐页渲染和已有文本层提取。</p></article>
-          <article class="card"><span class="number">REVIEW</span><h3>页面原图、笔记与状态</h3><p>以页面为单位查看原图、编辑 Markdown 并记录人工复核状态。</p></article>
-          <article class="card"><span class="number">SEARCH</span><h3>中文全文检索</h3><p>多关键词、组合筛选、排序、命中字段和关键词高亮。</p></article>
-          <article class="card"><span class="number">EVIDENCE</span><h3>证据对象与来源追溯</h3><p>整页、文字选区与图片区域统一保存，并按类型校验来源锚点。</p></article>
-          <article class="card"><span class="number">BATCH</span><h3>可见范围批量整理</h3><p>批量处理当前可见页面的状态、标签和项目，写入前预检并确认。</p></article>
-          <article class="card"><span class="number">MAINTENANCE</span><h3>本地备份、恢复与诊断</h3><p>提供完整备份、恢复预检和默认只读的系统诊断。</p></article>
-        </div>
-        <h3 style="margin-top:36px">v0.4.0 发布亮点：证据对象与来源模型</h3>
-        <div class="feature-grid">
-          <article class="card"><span class="number">PAGE</span><h3>页面证据</h3><p>引用整个页面，保留文档、页码与来源定位。</p></article>
-          <article class="card"><span class="number">TEXT</span><h3>文字选区证据</h3><p>保存选区内容，并按来源文本哈希识别原文变化。</p></article>
-          <article class="card"><span class="number">REGION</span><h3>图片区域证据</h3><p>以原始 PNG 哈希、尺寸和坐标锚定图片局部。</p></article>
-          <article class="card"><span class="number">CONFIRM</span><h3>人工确认状态</h3><p>用户可显式确认或取消确认每条证据。</p></article>
-          <article class="card"><span class="number">NOTES</span><h3>笔记接入证据篮</h3><p>页面、文字选区与图片区域结构化笔记可显式加入。</p></article>
-          <article class="card"><span class="number">VERIFIED</span><h3>验证结果</h3><p>最终统一 Release Check、1020 项完整 pytest、Ruff 与真人 Smoke Test 全部通过。</p></article>
-        </div>
-        <p class="section-intro" style="margin-top:18px">数据库升级为 schema v7，既有证据完整保留并迁移为未确认的文字选区证据。详见 <a href="./v0.4.0-release-summary.md">v0.4.0 公开发布摘要</a>。</p>
-        <p class="section-intro" style="margin-top:18px">v0.4.3 完成 RPV-01～11 和 H1～H7；RPV-12 延后至 v0.5.0，OBS-E 保持为 MEDIUM 技术债。详见 <a href="./v0.4.3-release-summary.md">v0.4.3 公开发布摘要</a>。</p>
-        <div class="boundary"><strong>技术边界：</strong>本地单用户、离线优先；SQLite + FTS5；正式服务只监听 127.0.0.1:8501；无账号和云同步依赖；v0.4.3 不要求 API Key，AI 仍只是未来可选增强。</div>
-      </div>
-    </section>
-
-    <section id="screens">
-      <div class="container">
-        <p class="eyebrow">Interface</p>
-        <h2>真实界面，合成演示资料</h2>
-        <p class="section-intro">以下截图展示的是核心 UI 工作流，均来自 v0.1.2 界面，使用与正式环境隔离的合成演示资料，不包含真实课程材料或个人数据。v0.4.0 的证据对象、来源模型与新侧边栏以发布摘要为准；这些截图不是 v0.4.0 新截图。</p>
-        <div class="shot-grid">
-          <article class="shot-card featured">
-            <div class="shot"><img src="../assets/reading-and-review.png" width="1280" height="720" loading="lazy" alt="页面阅读与复核界面，左侧为合成实验资料页面，右侧为 Markdown 笔记编辑区"></div>
-            <div class="shot-copy"><h3>页面阅读与复核</h3><p>在同一上下文中查看页面原图、编辑 Markdown 笔记并维护复核状态。</p></div>
-          </article>
-          <article class="shot-card">
-            <div class="shot"><img src="../assets/search-overview.png" width="1280" height="720" loading="lazy" alt="全文检索界面，展示合成关键词、筛选入口、排序方式和搜索结果区域"></div>
-            <div class="shot-copy"><h3>检索入口</h3><p>使用多关键词、快捷筛选、组合条件和排序定位候选页面。</p></div>
-          </article>
-          <article class="shot-card">
-            <div class="shot"><img src="../assets/search-highlight.png" width="1280" height="720" loading="lazy" alt="搜索结果详情，展示合成资料中的关键词高亮、来源文档和页码"></div>
-            <div class="shot-copy"><h3>关键词高亮</h3><p>回到具体文档、页码和命中片段，快速确认上下文。</p></div>
-          </article>
-          <article class="shot-card">
-            <div class="shot"><img src="../assets/evidence-basket.png" width="1280" height="720" loading="lazy" alt="证据篮界面，展示合成选区、来源文档、页码、复核状态和备注区域"></div>
-            <div class="shot-copy"><h3>证据篮</h3><p>把具体选区、个人备注、页面状态和来源位置一起保存。</p></div>
-          </article>
-          <article class="shot-card">
-            <div class="shot"><img src="../assets/batch-operations.png" width="1280" height="720" loading="lazy" alt="当前可见页面批量操作界面，展示页面选择、操作类型和目标状态"></div>
-            <div class="shot-copy"><h3>当前可见页面批量操作</h3><p>批量操作只作用于用户明确选中的当前可见页面。</p></div>
-          </article>
-          <article class="shot-card">
-            <div class="shot"><img src="../assets/maintenance.png" width="1280" height="510" loading="lazy" alt="系统维护界面安全裁剪，展示 v0.1.2、schema v4、文档与页面统计"></div>
-            <div class="shot-copy"><h3>本地备份与维护</h3><p>提供本地备份、恢复预检与只读诊断入口。</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="progress">
-      <div class="container">
-        <p class="eyebrow">Progress</p>
-        <h2>当前进度</h2>
-        <ul class="progress-list">
-          <li>已有本地可运行 MVP，并持续迭代了多个版本；</li>
-          <li>v0.4.3 是当前稳定展示基线，已完成正式发布；</li>
-          <li>v0.4.3 完成 RPV-01～11、H1～H7 和完整自动发布门禁；</li>
-          <li>完整源码已在独立 source repository 公开；当前未提供独立安装包或打包后的可执行程序；</li>
-          <li>尚未形成规模化外部用户。</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="next">
-      <div class="container">
-        <p class="eyebrow">Next steps</p>
-        <h2>后续方向</h2>
-        <div class="plan-grid">
-          <article class="plan-card"><span class="plan-no">01</span><h3>改善人工组织工作流</h3><p>继续改善工程资料的人工组织和页面级工作流。</p></article>
-          <article class="plan-card"><span class="plan-no">02</span><h3>继续改善知识组织</h3><p>继续改善手写内容的人工整理与知识关系组织。</p></article>
-          <article class="plan-card"><span class="plan-no">03</span><h3>诊断展示与恢复能力</h3><p>诊断摘要展示、文档状态刷新与恢复能力属于后续事项。</p></article>
-          <article class="plan-card"><span class="plan-no">04</span><h3>AI 保持后期可选增强</h3><p>AI 不是 v0.4.3 已实现功能，仍作为后期可选增强评估。</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="long-term">
-      <div class="container">
-        <p class="eyebrow">Long-term direction</p>
-        <h2>长期方向</h2>
-        <p class="warning">以上为长期规划，不是当前已实现功能。</p>
-        <ul class="future-list">
-          <li>手写笔记识别；</li>
-          <li>低置信度内容人工校正；</li>
-          <li>公式、电路或局部内容解释；</li>
-          <li>结合当前页面、相邻页面和来源资料提供上下文；</li>
-          <li>将 AI 结果与来源原文、人工确认明确区分。</li>
-        </ul>
-        <p class="boundary">AI 只作为可选增强。原始资料和人工确认始终掌握最终可信度，AI 服务不可用时也不影响核心知识管理功能。</p>
-      </div>
-    </section>
-
-    <section id="attachment">
-      <div class="container">
-        <div class="attachment">
-          <div>
-            <h2>项目介绍附件</h2>
-            <p>5 页 16:9 中文项目介绍 PDF</p>
-            <small>附件是 v0.1.2 时期的早期项目介绍，其中“尚未公开发布”只记录当时状态。当前完整源码已经公开，尚未提供的是独立安装包或打包后的可执行程序；当前项目状态以本页和 v0.4.3 公开发布摘要为准。</small>
-          </div>
-          <a class="button" href="./project-introduction.pdf">查看项目介绍 PDF</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="public-scope">
-      <div class="container">
-        <p class="eyebrow">Public scope</p>
-        <h2>当前公开范围</h2>
-        <ul class="public-list">
-          <li>当前仓库用于项目介绍与界面演示；</li>
-          <li>暂不包含完整源码，也不提供安装包；</li>
-          <li>不包含真实个人知识库、课程资料、数据库、备份或日志；</li>
-          <li>界面截图仅使用合成演示资料；</li>
-          <li>后续是否公开源码，将在项目达到合适阶段后决定。</li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">Engineering Knowledge Base · 公开项目展示仓库 · 稳定展示基线 v0.4.3</div>
-  </footer>
+  <footer><div class="wrap">Engineering Knowledge Base · v0.5.0 public showcase · 2026-08-17</div></footer>
 </body>
 </html>
